@@ -41,7 +41,7 @@ namespace MoviesFair.Areas.Admin.Controllers
             {
                 _db.Genres.Add(GenreTypes);
                 await _db.SaveChangesAsync();
-                TempData["save"] = "Genre has been Added";
+                //TempData["save"] = "Genre has been Added";
                 return RedirectToAction(nameof(Index));
             }
 
