@@ -1,0 +1,64 @@
+﻿@model List<MoviesFair.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movies Page";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="search-container">
+                <form method="post" action="@Url.Action("Index", "Home")" class="search-form">
+                    <div class="input-group">
+                        <div class="select-container">
+                            <select class="form-control select-option" name="GenreId">
+                                <option selected value="0">Genre List</option>
+                                @if (ViewData["GenreTypeSearchId"] is SelectList genreList)
+                                {
+                                    foreach (var genre in genreList)
+                                    {
+                                        <option value="@genre.Value">@genre.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <input placeholder="Search Movies..." type="text" name="searchString" class="form-control" value="@ViewBag.SearchString">
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        @foreach (var movie in Model)
+        {
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="card h-100 position-relative shadow-sm">
+                    <img class="card-img-top" img src="~/@movie.Image" style="height:270px; width:100%" alt="@movie.Name">
+                    <div class="card-body">
+                        <h6 class="card-title">@movie.Name</h6>
+                        <div class="ms-lg-3">
+                            <small class="text-muted">Year: @movie.Year</small>
+                            <br />
+                            <small class="text-muted">Genre: @movie.Genre.GenreName</small>
+                            <br />
+                            <small class="text-muted">Category: @movie.Category.CategoryName</small>
+                        </div>
+                    </div>
+                    <div class="card-footer btn-group">
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
+                        <a asp-action="Download" class="btn btn-success">Download</a>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3">
+                        <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> Add to Favorites</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

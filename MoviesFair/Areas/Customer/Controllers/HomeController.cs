@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using MoviesFair.Data;
+using MoviesFair.Models;
 using MoviesFair.Models.View_Model;
 using X.PagedList;
 
@@ -12,24 +14,68 @@ namespace MoviesFair.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly IMemoryCache _cache;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IMemoryCache cache)
         {
             _logger = logger;
             _context = context;
+            _cache = cache;
         }
 
-        public IActionResult Index(int? page)
-        {
-            var moviesQuery = _context.Movies.Include(c => c.Genre).Include(c => c.Category).AsQueryable();
 
-            var movies = moviesQuery.ToList().ToPagedList(page ?? 1, 4);
+        public IActionResult Index()
+        {
+            var moviesQuery = _context.Movies
+          .Include(c => c.Genre)
+          .Include(c => c.Category)
+          .OrderByDescending(m => m.Id) // Sort by descending order of ID
+          .AsQueryable();
+
+            // Retrieve movies
+            var movies = moviesQuery.ToList();
 
             // Pass genre list to the view
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
 
-            return View(movies);
+            // Initialize view model
+            var viewModel = new IndexPageViewModel
+            {
+                Movies = movies,
+                Action = GetCachedMoviesByCategory("Action"),
+                Horror = GetCachedMoviesByCategory("Horror"),
+                Romantic = GetCachedMoviesByCategory("Romantic"),
+                Animation = GetCachedMoviesByCategory("Animation"),
+                Sci_Fi = GetCachedMoviesByCategory("Sci-Fi"),
+                War = GetCachedMoviesByCategory("War"),
+                Advanture = GetCachedMoviesByCategory("Adventure"),
+                History = GetCachedMoviesByCategory("History"),
+                Comedy = GetCachedMoviesByCategory("Comedy")
+            };
+
+            return View(viewModel);
         }
+
+        private IEnumerable<Movie> GetCachedMoviesByCategory(string category)
+        {
+            if (!_cache.TryGetValue(category, out IEnumerable<Movie> cachedMovies))
+            {
+                // Data is not in cache, so retrieve it from the database
+                cachedMovies = _context.Movies
+                    .Where(m => m.Genre.GenreName == category)
+                    .Include(m => m.Genre)
+                    .Include(m => m.Category)
+                    .OrderByDescending(m => m.Id)
+                    .ToList();
+
+                // Cache the data for 5 minutes
+                _cache.Set(category, cachedMovies, TimeSpan.FromMinutes(5));
+            }
+
+            return cachedMovies;
+        }
+
+
 
 
 
@@ -55,8 +101,36 @@ namespace MoviesFair.Areas.Customer.Controllers
             // Pass genre list to the view
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
 
-            return View(movies);
+            return RedirectToAction("MoviesPage", new { searchString, genreId });
         }
+
+
+        public IActionResult MoviesPage(string searchString, int genreId = 0)
+        {
+            var moviesQuery = _context.Movies.Include(c => c.Genre).Include(c => c.Category).AsQueryable();
+
+            // Filter by genre if selected
+            if (genreId != 0)
+            {
+                moviesQuery = moviesQuery.Where(m => m.GenreId == genreId);
+            }
+
+            // Filter by search string
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                moviesQuery = moviesQuery.Where(m => m.Name.Contains(searchString));
+            }
+
+            var movies = moviesQuery.ToList();
+
+            // Pass genre list to the view
+            ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
+
+            return View("MoviesPage", movies);
+        }
+
+
+
 
         public IActionResult Details(int? id)
         {

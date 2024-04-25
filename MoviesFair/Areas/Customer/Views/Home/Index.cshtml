@@ -1,51 +1,45 @@
-﻿@model X.PagedList.IPagedList<MoviesFair.Models.Movie>
-@using X.PagedList.Mvc.Core 
-
+﻿@model MoviesFair.Models.View_Model.IndexPageViewModel
 
 @{
     ViewData["Title"] = "Movie Index";
 }
-<br />
 
-<div class="row mt-20 mb-20">
-    <div class="col-md-4"></div>
-    <div class="col-md-6">
-        <div class="search-container">
-            <form method="post" action="@Url.Action("Index", "Home")" class="search-form">
-                <div class="input-group">
-                    <div class="select-container">
-                        <select class="select-option" name="GenreId">
-                            <option selected value="0">Genre List</option>
-                            @if (ViewData["GenreTypeSearchId"] is SelectList genreList)
-                            {
-                                foreach (var genre in genreList)
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="search-container">
+                <form method="post" action="@Url.Action("Index", "Home")" class="search-form">
+                    <div class="input-group">
+                        <div class="select-container">
+                            <select class="form-control select-option" name="GenreId">
+                                <option selected value="0">Genre List</option>
+                                @if (ViewData["GenreTypeSearchId"] is SelectList genreList)
                                 {
-                                    <option value="@genre.Value">@genre.Text</option>
+                                    foreach (var genre in genreList)
+                                    {
+                                        <option value="@genre.Value">@genre.Text</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <input placeholder="Search Movies..." type="text" name="searchString" class="form-control">
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
                     </div>
-                    <div class="input-container">
-                        <input placeholder="Search Movies..." type="text" name="searchString">
-                    </div>
-                    <div class="button-container">
-                        <button type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="col-md-3"></div>
 </div>
 
-<br />
-<br />
+<h4>All Movies</h4>
 
- 
-
-<div class="container mt-20">
+<div class="container mt-4">
     <div class="row">
-        @foreach (var movie in Model)
+        @foreach (var movie in Model.Movies)
         {
             <div class="col-lg-3 col-md-4 mb-4">
                 <div class="card h-100 position-relative shadow-sm">
@@ -53,10 +47,8 @@
                     <div class="card-body">
                         <h6 class="card-title">@movie.Name</h6>
                         <div class="ms-lg-3">
-                            <small class="text-muted">Year: @movie.Year</small>
-                            <br />
-                            <small class="text-muted">Genre: @movie.Genre.GenreName</small>
-                            <br />
+                            <small class="text-muted">Year: @movie.Year</small><br />
+                            <small class="text-muted">Genre: @movie.Genre.GenreName</small><br />
                             <small class="text-muted">Category: @movie.Category.CategoryName</small>
                         </div>
                     </div>
@@ -72,46 +64,86 @@
         }
     </div>
 </div>
-@* 
-<div class="shop_toolbar t_bottom text-center">
-    <div class="pagination">
 
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, foo1Param = "1", foo2Param = "2"}))
+<br />
+<br />
+<h4>Action Movies</h4>
 
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var movie in Model.Action)
+        {
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="card h-100 position-relative shadow-sm">
+                    <img class="card-img-top" src="@movie.Image" alt="@movie.Name" style="width: 100%; height: 340px;">
+                    <div class="card-body">
+                        <h6 class="card-title">@movie.Name</h6>
+                        <div class="ms-lg-3">
+                            <small class="text-muted">Year: @movie.Year</small><br />
+                            <small class="text-muted">Genre: @movie.Genre.GenreName</small><br />
+                            <small class="text-muted">Category: @movie.Category.CategoryName</small>
+                        </div>
+                    </div>
+                    <div class="card-footer btn-group">
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
+                        <a asp-action="Download" class="btn btn-success">Download</a>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3">
+                        <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> Add to Favorites</button>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-</div> *@
-
-<div class=" btn-group display: flex; justify-content: center; align-items: center;">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, foo1Param = "1", foo2Param = "2"}))
 </div>
 
+<br />
+<h4>Animation Movies</h4>
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var movie in Model.Animation)
+        {
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="card h-100 position-relative shadow-sm">
+                    <img class="card-img-top" src="@movie.Image" alt="@movie.Name" style="width: 100%; height: 340px;">
+                    <div class="card-body">
+                        <h6 class="card-title">@movie.Name</h6>
+                        <div class="ms-lg-3">
+                            <small class="text-muted">Year: @movie.Year</small><br />
+                            <small class="text-muted">Genre: @movie.Genre.GenreName</small><br />
+                            <small class="text-muted">Category: @movie.Category.CategoryName</small>
+                        </div>
+                    </div>
+                    <div class="card-footer btn-group">
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
+                        <a asp-action="Download" class="btn btn-success">Download</a>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3">
+                        <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> Add to Favorites</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+@* <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group d-flex justify-content-center align-items-center">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, foo1Param = "1", foo2Param = "2"}))
+            </div>
+        </div>
+    </div>
+</div> *@
 
 @section Scripts{
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-@* @section scripts {
-    <script>
-        $(document).ready(function () {
-            $('.add-to-favorites').click(function () {
-                var movieId = $(this).data('movie-id');
-                $.ajax({
-                    url: '@Url.Action("AddToFavorites", "Favorites")',
-                    type: 'POST',
-                    data: { movieId: movieId },
-                    success: function (response) {
-                        // Handle success response here (if needed)
-                        console.log(response);
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error response here (if needed)
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
-}
- *@
