@@ -1,4 +1,6 @@
-﻿@model List<MoviesFair.Models.Movie>
+﻿@model X.PagedList.IPagedList<MoviesFair.Models.Movie>
+@using X.PagedList.Mvc.Core 
+
 
 @{
     ViewData["Title"] = "Movie Index";
@@ -39,7 +41,7 @@
 <br />
 <br />
 
-
+ 
 
 <div class="container mt-20">
     <div class="row">
@@ -59,7 +61,7 @@
                         </div>
                     </div>
                     <div class="card-footer btn-group">
-                        <a asp-action="View" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
                         <a asp-action="Download" class="btn btn-success">Download</a>
                     </div>
                     <div class="position-absolute top-0 end-0 m-3">
@@ -70,8 +72,27 @@
         }
     </div>
 </div>
+@* 
+<div class="shop_toolbar t_bottom text-center">
+    <div class="pagination">
 
-@section scripts {
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, foo1Param = "1", foo2Param = "2"}))
+
+    </div>
+</div> *@
+
+<div class=" btn-group display: flex; justify-content: center; align-items: center;">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, foo1Param = "1", foo2Param = "2"}))
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@* @section scripts {
     <script>
         $(document).ready(function () {
             $('.add-to-favorites').click(function () {
@@ -93,3 +114,4 @@
         });
     </script>
 }
+ *@

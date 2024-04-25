@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoviesFair.Data;
+using X.PagedList;
 
 namespace MoviesFair.Areas.Customer.Controllers
 {
@@ -17,11 +18,11 @@ namespace MoviesFair.Areas.Customer.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
             var moviesQuery = _context.Movies.Include(c => c.Genre).Include(c => c.Category).AsQueryable();
 
-            var movies = moviesQuery.ToList();
+            var movies = moviesQuery.ToList().ToPagedList(page ?? 1, 4);
 
             // Pass genre list to the view
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
@@ -54,6 +55,28 @@ namespace MoviesFair.Areas.Customer.Controllers
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
 
             return View(movies);
+        }
+
+        public IActionResult Details(int? id)
+        {
+            ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = _context.Movies
+                .Include(c => c.Genre)
+                .Include(c => c.Category)
+                .FirstOrDefault(m => m.Id == id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return View(movie);
         }
 
     }
