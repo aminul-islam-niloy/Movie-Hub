@@ -40,7 +40,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "areas",
-        pattern: "{area=Admin}/{controller=Genre}/{action=Index}/{id?}");
+        pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
     endpoints.MapRazorPages();
 });
 

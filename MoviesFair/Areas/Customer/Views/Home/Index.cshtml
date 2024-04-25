@@ -1,0 +1,58 @@
+﻿@model List<MoviesFair.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movie Index";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var movie in Model)
+        {
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="card h-100 position-relative">
+                    <img class="card-img-top" src="@movie.Image" alt="@movie.Name" style="width: 100%; height: 280px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.Name</h5>
+                        <div class="ms-lg-3">
+                            <small class="text-muted">Year: @movie.Year</small>
+                            <br />
+                            <small class="text-muted">Genre: @movie.Genre.GenreName</small>
+                            <br />
+                            <small class="text-muted">Category: @movie.Category.CategoryName</small>
+                        </div>
+                    </div>
+                    <div class="card-footer btn-group">
+                        <a asp-action="View" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
+                        <a asp-action="Download" class="btn btn-success">Download</a>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3">
+                        <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> Add to Favorites</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.add-to-favorites').click(function () {
+                var movieId = $(this).data('movie-id');
+                $.ajax({
+                    url: '@Url.Action("AddToFavorites", "Favorites")',
+                    type: 'POST',
+                    data: { movieId: movieId },
+                    success: function (response) {
+                        // Handle success response here (if needed)
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response here (if needed)
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}
