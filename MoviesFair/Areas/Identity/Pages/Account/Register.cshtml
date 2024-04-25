@@ -27,6 +27,19 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+
+            <div class="mb-4">
+                <div class="form-check form-group">
+                    <label>Select Role :</label> <br />
+
+                      <input type="checkbox" name="roles" value="Customer" /> Customer<br />
+                    
+                      <input type="checkbox" name="roles" value="Admin" /> Admin<br />
+                    
+                </div>
+            </div>
+
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>

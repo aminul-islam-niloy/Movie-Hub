@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    string userId = UserManager.GetUserId(User);
+}
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,12 +33,38 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+
+                        @if (userRole == "Admin")
+                        {
+
+                            <li>
+                                <a asp-area="Admin" asp-controller="Movies" asp-action="Index" class="nav-link">Products</a>
+                            </li>
+
+                            <li>
+                                <a asp-area="Admin" asp-controller="Genre" asp-action="Index" class="nav-link">Products</a>
+                            </li>
+
+                            <li>
+                                <a asp-area="Admin" asp-controller="Categories" asp-action="Index" class="nav-link">Products</a>
+                            </li>
+
+                            <li>
+                                <a asp-area="Admin" asp-controller="Role" asp-action="Index" class="nav-link">Products</a>
+                            </li>
+
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+
+
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
