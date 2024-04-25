@@ -24,16 +24,29 @@ namespace MoviesFair.Areas.Customer.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var moviesQuery = _context.Movies
-          .Include(c => c.Genre)
-          .Include(c => c.Category)
-          .OrderByDescending(m => m.Id) // Sort by descending order of ID
-          .AsQueryable();
+            var pageNumber = page ?? 1;
+            var pageSize = 12;
 
-            // Retrieve movies
-            var movies = moviesQuery.ToList();
+            // Check if the page of movies is already cached
+            if (!_cache.TryGetValue($"MoviesPage_{pageNumber}_{pageSize}", out IPagedList<Movie> cachedMovies))
+            {
+                // Movies page is not in cache, so retrieve it from the database
+                var moviesQuery = _context.Movies
+                    .Include(c => c.Genre)
+                    .Include(c => c.Category)
+                    .OrderByDescending(m => m.Id) // Sort by descending order of ID
+                    .AsQueryable();
+
+                // Paginate the movies
+                var movies = moviesQuery.ToPagedList(pageNumber, pageSize);
+
+                // Cache the movies page
+                _cache.Set($"MoviesPage_{pageNumber}_{pageSize}", movies, TimeSpan.FromMinutes(5));
+
+                cachedMovies = movies;
+            }
 
             // Pass genre list to the view
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
@@ -41,7 +54,7 @@ namespace MoviesFair.Areas.Customer.Controllers
             // Initialize view model
             var viewModel = new IndexPageViewModel
             {
-                Movies = movies,
+                Movies = cachedMovies,
                 Action = GetCachedMoviesByCategory("Action"),
                 Horror = GetCachedMoviesByCategory("Horror"),
                 Romantic = GetCachedMoviesByCategory("Romantic"),
@@ -55,6 +68,7 @@ namespace MoviesFair.Areas.Customer.Controllers
 
             return View(viewModel);
         }
+
 
         private IEnumerable<Movie> GetCachedMoviesByCategory(string category)
         {
