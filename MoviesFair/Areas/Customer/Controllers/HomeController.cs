@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoviesFair.Data;
+using MoviesFair.Models.View_Model;
 using X.PagedList;
 
 namespace MoviesFair.Areas.Customer.Controllers
@@ -66,17 +67,29 @@ namespace MoviesFair.Areas.Customer.Controllers
                 return NotFound();
             }
 
-            var movie = _context.Movies
+            var Specificmovie = _context.Movies
                 .Include(c => c.Genre)
                 .Include(c => c.Category)
                 .FirstOrDefault(m => m.Id == id);
 
-            if (movie == null)
+            if (Specificmovie == null)
             {
                 return NotFound();
             }
 
-            return View(movie);
+            var relatedMovies = _context.Movies
+               .Where(p => p.GenreId == Specificmovie.GenreId && p.Id != Specificmovie.Id)
+               .Take(12) // Assuming  want to display 12 related products
+               .ToList();
+
+            var viewModel = new DetaislViewModel
+            {
+                SpecificMovies = Specificmovie,
+                RelatedMovies = relatedMovies
+            };
+
+
+            return View(viewModel);
         }
 
     }
