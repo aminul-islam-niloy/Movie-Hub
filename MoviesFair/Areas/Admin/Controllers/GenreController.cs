@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesFair.Controllers;
 using MoviesFair.Data;
@@ -7,6 +8,7 @@ using MoviesFair.Models;
 namespace MoviesFair.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class GenreController : Controller
     {
         private ApplicationDbContext _db;
