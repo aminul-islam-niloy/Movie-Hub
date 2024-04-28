@@ -180,5 +180,30 @@ namespace MoviesFair.Areas.Customer.Controllers
             return View(viewModel);
         }
 
+
+
+        public IActionResult MoviesByGenre(string genreName)
+        {
+            var movies = _context.Movies
+                                  .Include(m => m.Genre)
+                                  .Include(m => m.Category)
+                                  .Where(m => m.Genre.GenreName == genreName)
+                                  .ToList();
+            ViewData["Title"] = $"Movies by Genre: {genreName}";
+            return View("MoviesByGenre", movies);
+        }
+
+
+        public IActionResult MoviesByCategory(string categoryName)
+        {
+            var movies = _context.Movies
+                                  .Include(m => m.Genre)
+                                  .Include(m => m.Category)
+                                  .Where(m => m.Category.CategoryName == categoryName)
+                                  .ToList();
+            ViewData["Title"] = $"Movies by Category: {categoryName}";
+            return View("MoviesByGenre", movies); // Reusing the same view as MoviesByGenre
+        }
+
     }
 }

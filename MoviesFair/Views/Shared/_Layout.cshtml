@@ -25,21 +25,28 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+     
+
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="moviesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Movies
                             </a>
                             <div class="dropdown-menu" aria-labelledby="moviesDropdown">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Horror</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Action</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Romantic</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Animation</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Sci-Fi</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">War</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Advanture</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">History</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Comedy</a>
                              
+
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Horror"> Horror Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Action"> Action Movies </a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Romantic"> Romantic Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Animation"> Animation Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Sci_Fi"> Sci-Fi Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="War"> War Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Advanture"> Advanture Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="History"> History Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Comedy"> Comedy Movies</a>
+                               
+                   
+
                             </div>
                         </li>
 
@@ -48,15 +55,19 @@
                                 Series
                             </a>
                             <div class="dropdown-menu" aria-labelledby="seriesDropdown">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Netflix top</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Advanture </a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">HollyWood</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Indian </a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Sci-Fi</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Chiness </a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Advanture</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">History</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Bangla</a>
+                   
+             
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Hollywood Movie">Hollywood Movie</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Tv Series">Tv Series</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Hollywood">Hollywood</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Hollywood Movie">Hollywood Movie</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="English Movie">English Movie</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Turkish Series">Turkish Series</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Chinese Movie">Chinese Movie</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Asian Movies">Asian Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Arabic Movies">Arabic Movies</a>
+                                <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Dollywood ">Dollywood  Movies</a>
+
                              
                             </div>
                         </li>
@@ -99,6 +110,7 @@
                                 Important Sites
                             </a>
                             <div class="dropdown-menu" aria-labelledby="ImportantSites">
+                                <a class="dropdown-item" href="#">Netflix Top</a>
                                 <a class="dropdown-item" href="#">Top Imdb</a>
                                 <a class="dropdown-item" href="#">Top 10 Series</a>
                                 <a class="dropdown-item" href="#">Oscar</a>
@@ -244,7 +256,22 @@
 
     <!-- End of .container -->
 
-      
+    <script>
+        function getMoviesByGenre(genreName) {
+            $.ajax({
+                url: '@Url.Action("MoviesByGenre", "Home")',
+                type: 'GET',
+                data: { genreName: genreName },
+                success: function (data) {
+                   
+                    $('#moviesContainer').html(data);
+                },
+                error: function () {
+                    alert('Error occurred while retrieving movies.');
+                }
+            });
+        }
+    </script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
