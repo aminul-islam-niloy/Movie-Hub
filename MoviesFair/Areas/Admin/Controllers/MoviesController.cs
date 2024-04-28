@@ -61,41 +61,7 @@ namespace MoviesFair.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Name,GenreId,CategoryId,Image,Description,Language,Year")] Movie movie, IFormFile image)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (image != null && image.Length > 0)
-        //        {
-        //            // Generate a unique filename for the image
-        //            var fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(image.FileName);
-
-        //            // Construct the path where the image will be saved (assuming it's in the wwwroot/images folder)
-        //            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", fileName);
-
-        //            // Save the image file to the specified path
-        //            using (var stream = new FileStream(filePath, FileMode.Create))
-        //            {
-        //                await image.CopyToAsync(stream);
-        //            }
-
-        //            // Set the Image property of the movie to the path of the uploaded image
-        //            movie.Image = "/images/" + fileName;
-        //        }
-
-        //        // Add the movie to the database context and save changes
-        //        _context.Add(movie);
-        //        await _context.SaveChangesAsync();
-
-        //        // Redirect to the index action
-        //        return RedirectToAction(nameof(Index));
-        //    }
-
-        //    // If model state is not valid, return the view with validation errors
-        //    ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName", movie.CategoryId);
-        //    ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "GenreName", movie.GenreId);
-        //    return View(movie);
-        //}
+     
 
         public async Task<IActionResult> Create(Movie movie, List<IFormFile> MovieImages)
         {
