@@ -25,6 +25,46 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="moviesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Movies
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="moviesDropdown">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Horror</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Action</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Romantic</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Animation</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Sci-Fi</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">War</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Advanture</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">History</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Comedy</a>
+                             
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="seriesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Series
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="seriesDropdown">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Netflix top</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Advanture </a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">HollyWood</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Indian </a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Sci-Fi</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Chiness </a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Advanture</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">History</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Bangla</a>
+                             
+                            </div>
+                        </li>
+
+                 
+
+
+
                         @if (User.IsInRole("Admin"))
                         {
 
@@ -54,11 +94,25 @@
                         }
 
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="seriesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Important Sites
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="ImportantSites">
+                                <a class="dropdown-item" href="#">Top Imdb</a>
+                                <a class="dropdown-item" href="#">Top 10 Series</a>
+                                <a class="dropdown-item" href="#">Oscar</a>
+                  
+                            </div>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Request a Movie</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">About</a>
+                        </li>
 
 
                     </ul>

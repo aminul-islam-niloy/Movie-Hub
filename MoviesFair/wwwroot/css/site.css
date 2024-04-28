@@ -113,3 +113,19 @@ button {
         font-weight: bold;
     }
 
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown-menu {
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add shadow effect */
+}
+
+    .dropdown-menu a:hover {
+        background-color: #f1f1f1; /* Change background color on hover */
+    }
