@@ -274,6 +274,47 @@
         }
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).on('click', '.add-to-favorites', function () {
+            var movieId = $(this).data('movie-id');
+            $.ajax({
+                url: '@Url.Action("AddToFavorites", "Home")',
+                type: 'POST',
+                data: { movieId: movieId },
+                success: function () {
+                    alert('Movie added to favorites.');
+                    // You can perform additional actions here, such as updating UI or refreshing the page.
+                },
+                error: function () {
+                    alert('Error occurred while adding movie to favorites.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).on('click', '.remove-from-favorites', function () {
+            var movieId = $(this).data('movie-id');
+            $.ajax({
+                url: '@Url.Action("RemoveFromFavorites", "Home")',
+                type: 'POST',
+                data: { movieId: movieId },
+                success: function () {
+                    alert('Movie removed from favorites.');
+                    // Optionally, update the UI to reflect the removal.
+                    location.reload(); // Refresh the page
+                },
+                error: function () {
+                    alert('Error occurred while removing movie from favorites.');
+                }
+            });
+        });
+    </script>
+
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

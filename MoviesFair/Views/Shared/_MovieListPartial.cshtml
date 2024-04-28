@@ -35,3 +35,22 @@
         </div>
     </div>
 }
+
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.add-to-favorites', function () {
+            var movieId = $(this).data('movie-id');
+            $.ajax({
+                url: '@Url.Action("AddToFavorites", "YourControllerName")',
+                type: 'POST',
+                data: { movieId: movieId },
+                success: function () {
+                    alert('Movie added to favorites.');
+                },
+                error: function () {
+                    alert('Error occurred while adding movie to favorites.');
+                }
+            });
+        });
+    });
+</script>

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using MoviesFair.Data;
 using MoviesFair.Models;
 using MoviesFair.Models.View_Model;
+using System.Security.Claims;
 using X.PagedList;
 
 namespace MoviesFair.Areas.Customer.Controllers
@@ -204,6 +206,56 @@ namespace MoviesFair.Areas.Customer.Controllers
             ViewData["Title"] = $"Movies by Category: {categoryName}";
             return View("MoviesByGenre", movies); // Reusing the same view as MoviesByGenre
         }
+
+        [HttpPost]
+        public IActionResult AddToFavorites(int movieId)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                // Redirect to login page or show an error message
+                return RedirectToAction("Login", "Account");
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var favorite = new Favorite { MovieId = movieId, UserId = userId };
+
+            _context.Favorites.Add(favorite);
+            _context.SaveChanges();
+
+            // Redirect to the same page or a confirmation page
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public IActionResult FavoriteMovies()
+        {
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName");
+            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "GenreName");
+          
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var favoriteMovies = _context.Favorites
+                .Where(f => f.UserId == userId)
+                .Select(f => f.Movie)
+                .ToList();
+
+            return View(favoriteMovies);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult RemoveFromFavorites(int movieId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var favoriteToRemove = _context.Favorites.FirstOrDefault(f => f.UserId == userId && f.MovieId == movieId);
+            if (favoriteToRemove != null)
+            {
+                _context.Favorites.Remove(favoriteToRemove);
+                _context.SaveChanges();
+                return Ok();
+            }
+            return NotFound();
+        }
+
 
     }
 }

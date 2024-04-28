@@ -14,6 +14,7 @@ namespace MoviesFair.Data
         public DbSet<Category>? Category { get; set; }
         public DbSet<Movie>? Movies { get; set; }
         public DbSet<Review>? Reviews { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
         public DbSet<MovieImages>? MovieImages { get; set; }
 
     }
