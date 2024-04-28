@@ -100,7 +100,7 @@
                          @if (User.IsInRole("Customer"))
                         {
                             <li>
-                                <a asp-area="Customer" asp-controller="Fevorite" asp-action="Index" class="nav-link">My Favorites</a>
+                                <a asp-area="Customer" asp-controller="Home" asp-action="FavoriteMovies" class="nav-link">My Favorites</a>
                             </li>
                         }
 
@@ -146,31 +146,26 @@
         <footer class="text-center text-lg-start text-dark"
                 style="background-color: #ECEFF1">
             <!-- Section: Social media -->
-            <section class="d-flex justify-content-between p-4 text-white"
+            <section class="d-flex justify-content-between p-4 "
                  style="background-color: #ECEFF1">
              
                 <!-- Left -->
-                <!-- Right -->
-                <div>
-                    <a href="" class="text-white me-4">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="" class="text-white me-4">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="" class="text-white me-4">
-                        <i class="fab fa-google"></i>
-                    </a>
-                    <a href="" class="text-white me-4">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="" class="text-white me-4">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="" class="text-white me-4">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
+            <div >
+               @* 
+                
+                        <a href="https://www.instagram.com/aminul_islam_122/?hl=en" title="youtube"><i class="fa fa-share-alt"></i></a>
+                
+                        <i class="fa fa-instagram fs-2"></i>
+                        <a href="https://www.instagram.com/aminul_islam_122/?hl=en" title="instagram"> Instagram <i class="fa fa-instagram"></i> </a>
+                   
+                        <a href="https://www.facebook.com/aminulislamniloy122/" title="facebook"><i class="fa fa-facebook"></i></a>
+                    
+           
+                        <i class="fa-brands fa-github fs-2"></i>
+                        <a href="https://github.com/aminul-islam-niloy" title="Github">Github <i class="fa-brands fa-github"></i></a>
+                        *@
+             
+            </div>
                 <!-- Right -->
             </section>
             <!-- Section: Social media -->
@@ -182,7 +177,7 @@
                         <!-- Grid column -->
                         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                             <!-- Content -->
-                            <h6 class="text-uppercase fw-bold">Moview Fair</h6>
+                            <h6 class="text-uppercase fw-bold">Movies Fair</h6>
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
                                 style="width: 60px; background-color: #7c4dff; height: 2px" />
                           
