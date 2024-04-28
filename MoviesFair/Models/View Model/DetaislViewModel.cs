@@ -4,5 +4,6 @@
     {
         public Movie SpecificMovies { get; set; }
         public List<Movie> RelatedMovies { get; set; }
+        public List<MovieReviewViewModel> MovieReviews { get; set; }
     }
 }

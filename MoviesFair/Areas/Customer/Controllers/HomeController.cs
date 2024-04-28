@@ -172,14 +172,37 @@ namespace MoviesFair.Areas.Customer.Controllers
                .Take(12) // Assuming  want to display 12 related products
                .ToList();
 
+          
+
+            var movieReviews = _context.Reviews
+                .Where(r => r.MovieId == id)
+                .Select(r => new MovieReviewViewModel
+                {
+
+                    UserId = r.UserId,
+
+                    UserName = _context.Users.FirstOrDefault(u => u.Id == r.UserId).UserName,
+                     Comment = r.Comment,
+                    Rating = r.Rating
+                })
+                .ToList();
+
             var viewModel = new DetaislViewModel
             {
                 SpecificMovies = Specificmovie,
-                RelatedMovies = relatedMovies
+                RelatedMovies = relatedMovies,
+                MovieReviews = movieReviews
             };
 
 
             return View(viewModel);
+        }
+
+
+        private string GetUserNameById(string userId)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            return user != null ? user.UserName : string.Empty;
         }
 
 
@@ -207,6 +230,7 @@ namespace MoviesFair.Areas.Customer.Controllers
             return View("MoviesByGenre", movies); // Reusing the same view as MoviesByGenre
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddToFavorites(int movieId)
         {
@@ -255,6 +279,46 @@ namespace MoviesFair.Areas.Customer.Controllers
             }
             return NotFound();
         }
+
+        [Authorize]
+        public IActionResult CreateReview(int movieId)
+        {
+            ViewBag.MovieId = movieId; // Pass the movie ID to the view
+            return View();
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult CreateReview(Review review)
+        {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                review.UserId = userId;
+                review.ReviewDate = DateTime.Now;
+
+
+
+                _context.Reviews.Add(review);
+                _context.SaveChanges();
+
+                // Update movie's total rating and rating count
+                var movie = _context.Movies.Find(review.MovieId);
+                if (movie != null)
+                {
+                    // Calculate new overall rating and update total reviews
+                    var newTotalReviews = movie.TotalReviews + 1;
+                    var newOverallRating = (movie.OverallRating * movie.TotalReviews + review.Rating) / newTotalReviews;
+
+                    movie.TotalReviews = newTotalReviews;
+                    movie.OverallRating = newOverallRating;
+
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("Details", new { id = review.MovieId });
+          
+        }
+
 
 
     }

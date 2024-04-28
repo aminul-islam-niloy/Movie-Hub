@@ -29,9 +29,16 @@ namespace MoviesFair.Models
         public string? Description { get; set; }
         public string? Language { get; set; }
 
+        public double OverallRating { get; set; }
+        public int TotalReviews { get; set; }
+
+        public string? Sourcelink { get; set; }
+
         public int Year { get; set; }
         public ICollection<MovieImages>? MovieImages { get; set; }
         public ICollection<Review>? Reviews { get; set; }
+
+
 
     }
 }

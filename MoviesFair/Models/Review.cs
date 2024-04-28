@@ -7,12 +7,9 @@ namespace MoviesFair.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter your review")]
-        public string? Title { get; set; }
-
-        [Required(ErrorMessage = "Please enter your review")]
         public string? Comment { get; set; }
 
-        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
+        [Range(1, 10, ErrorMessage = "Rating must be between 1 and 5")]
         public int Rating { get; set; }
 
         [DataType(DataType.Date)]
@@ -22,11 +19,8 @@ namespace MoviesFair.Models
         public int MovieId { get; set; }
         public Movie? Movie { get; set; }
 
-        //[Required]
-        //public int UserId { get; set; }
-        //public User User { get; set; }
-
-        //public ApplicationUser User { get; set; }
+        [Required]
+        public string  UserId { get; set; }
 
     }
 }

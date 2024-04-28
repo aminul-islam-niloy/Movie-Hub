@@ -129,3 +129,42 @@ button {
     .dropdown-menu a:hover {
         background-color: #f1f1f1; /* Change background color on hover */
     }
+
+/*
+.review {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}*/
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.rating {
+    margin-bottom: 10px;
+}
+
+.stars {
+    color: orange; 
+}
+
+.comment {
+    color: #333; 
+}
+
+
+
