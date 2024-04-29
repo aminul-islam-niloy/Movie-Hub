@@ -147,22 +147,14 @@ namespace MoviesFair.Areas.Admin.Controllers
             return View(movie);
         }
 
-        // POST: Admin/Movies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Movie movie, List<IFormFile> MovieImages)
         {
 
             var searchmovie = _context.Movies.FirstOrDefault(c => c.Name == movie.Name);
-            if (searchmovie != null)
-            {
-                ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "CategoryName");
-                ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "GenreName");
-
-                return View(movie);
-            }
+           
 
             if (MovieImages != null && MovieImages.Count > 0)
             {
