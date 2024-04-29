@@ -1,7 +1,3 @@
-Certainly! Below is a template for a README file for your Movie Hub project:
-
----
-
 # Movie Hub
 
 Movie Hub is a web application developed using ASP.NET Core MVC, Identity, and Entity Framework Core. It serves as a platform for users to browse, view, download, and manage movies. Administrators have the capability to add and manage movies, while customers can browse, view, download, add to favorites, and provide reviews and ratings for movies.
@@ -32,7 +28,7 @@ Before running the application, make sure you have the following software instal
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/movie-hub.git
+   git clone https://github.com/aminul-islam-niloy/Movie-Hub.git
    ```
 
 2. Navigate to the project directory:
