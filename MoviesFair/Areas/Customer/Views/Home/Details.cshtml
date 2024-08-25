@@ -66,10 +66,10 @@
         <div class="btn-group">
             <br />
             <div class="text-center">
-                <a asp-action="CreateReview" asp-controller="Home" asp-route-movieId="@Model.SpecificMovies.Id" class="btn btn-primary"> Review & Rating</a>
+                <a asp-action="CreateReview" asp-controller="Home" asp-route-movieId="@Model.SpecificMovies.Id" class="btn btn-primary "> Review & Rating</a>
             </div>
-            <a href="https://drive.google.com/uc?export=download&amp;id=@Model.SpecificMovies.Sourcelink" class="btn btn-success">Download</a>
-            <a asp-action="Index" class="btn btn-secondary">Back to Index</a>
+            <a href="https://drive.google.com/uc?export=download&amp;id=@Model.SpecificMovies.Sourcelink" style="margin-left:5px" class="btn btn-success ml-2">Download</a>
+            <a asp-action="Index" class="btn btn-secondary ml-2" style="margin-left:5px">Back to Index</a>
         </div>
     </div>
 
