@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc.Testing;
+using MoviesFair.Data;
 
 namespace TestProject.text
 {
@@ -27,6 +28,22 @@ namespace TestProject.text
             //asert
 
             Assert.Equal(200, code);
+        }
+
+
+        [Fact]
+        public async void MoviesByGenre_ReturnsSuccess_WithActionGenre()
+        {
+            // Arrange
+            var client = _applicationFactory.CreateClient();
+
+            // Act
+            var response = await client.GetAsync("/Customer/Home/MoviesByGenre?genreName=Action");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.Contains("Movies by Genre: Action", responseContent); 
         }
     }
 }
