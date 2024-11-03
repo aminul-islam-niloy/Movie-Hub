@@ -120,12 +120,10 @@
                             </div>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Request a Movie</a>
-                        </li>
+                     
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">About</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
 
 
@@ -152,19 +150,7 @@
              
                 <!-- Left -->
             <div >
-               @* 
-                
-                        <a href="https://www.instagram.com/aminul_islam_122/?hl=en" title="youtube"><i class="fa fa-share-alt"></i></a>
-                
-                        <i class="fa fa-instagram fs-2"></i>
-                        <a href="https://www.instagram.com/aminul_islam_122/?hl=en" title="instagram"> Instagram <i class="fa fa-instagram"></i> </a>
-                   
-                        <a href="https://www.facebook.com/aminulislamniloy122/" title="facebook"><i class="fa fa-facebook"></i></a>
-                    
-           
-                        <i class="fa-brands fa-github fs-2"></i>
-                        <a href="https://github.com/aminul-islam-niloy" title="Github">Github <i class="fa-brands fa-github"></i></a>
-                        *@
+               
              
             </div>
                 <!-- Right -->
@@ -280,9 +266,7 @@
                 </div>
                 <div class="col-md-2"></div>
             </div>
-            <!-- Copyright -->
-            
-            <!-- Copyright -->
+         
         </footer>
         <!-- Footer -->
 
@@ -332,8 +316,8 @@
                 data: { movieId: movieId },
                 success: function () {
                     alert('Movie removed from favorites.');
-                    // Optionally, update the UI to reflect the removal.
-                    location.reload(); // Refresh the page
+                  
+                    location.reload(); 
                 },
                 error: function () {
                     alert('Error occurred while removing movie from favorites.');

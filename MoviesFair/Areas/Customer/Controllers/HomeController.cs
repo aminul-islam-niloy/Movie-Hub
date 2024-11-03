@@ -34,14 +34,12 @@ namespace MoviesFair.Areas.Customer.Controllers
             // Check if the page of movies is already cached
             if (!_cache.TryGetValue($"MoviesPage_{pageNumber}_{pageSize}", out IPagedList<Movie> cachedMovies))
             {
-                // Movies page is not in cache, so retrieve it from the database
                 var moviesQuery = _context.Movies
                     .Include(c => c.Genre)
                     .Include(c => c.Category)
                     .OrderByDescending(m => m.Id) // Sort by descending order of ID
                     .AsQueryable();
 
-                // Paginate the movies
                 var movies = moviesQuery.ToPagedList(pageNumber, pageSize);
 
                 // Cache the movies page
@@ -76,7 +74,6 @@ namespace MoviesFair.Areas.Customer.Controllers
         {
             if (!_cache.TryGetValue(category, out IEnumerable<Movie> cachedMovies))
             {
-                // Data is not in cache, so retrieve it from the database
                 cachedMovies = _context.Movies
                     .Where(m => m.Genre.GenreName == category)
                     .Include(m => m.Genre)
@@ -227,7 +224,7 @@ namespace MoviesFair.Areas.Customer.Controllers
                                   .Where(m => m.Category.CategoryName == categoryName)
                                   .ToList();
             ViewData["Title"] = $"Movies by Category: {categoryName}";
-            return View("MoviesByGenre", movies); // Reusing the same view as MoviesByGenre
+            return View("MoviesByGenre", movies); 
         }
 
         [Authorize]
@@ -236,7 +233,6 @@ namespace MoviesFair.Areas.Customer.Controllers
         {
             if (!User.Identity.IsAuthenticated)
             {
-                // Redirect to login page or show an error message
                 return RedirectToAction("Login", "Account");
             }
 
@@ -246,7 +242,6 @@ namespace MoviesFair.Areas.Customer.Controllers
             _context.Favorites.Add(favorite);
             _context.SaveChanges();
 
-            // Redirect to the same page or a confirmation page
             return RedirectToAction("Index");
         }
 
@@ -283,7 +278,7 @@ namespace MoviesFair.Areas.Customer.Controllers
         [Authorize]
         public IActionResult CreateReview(int movieId)
         {
-            ViewBag.MovieId = movieId; // Pass the movie ID to the view
+            ViewBag.MovieId = movieId;
             return View();
         }
 
@@ -301,11 +296,9 @@ namespace MoviesFair.Areas.Customer.Controllers
                 _context.Reviews.Add(review);
                 _context.SaveChanges();
 
-                // Update movie's total rating and rating count
                 var movie = _context.Movies.Find(review.MovieId);
                 if (movie != null)
                 {
-                    // Calculate new overall rating and update total reviews
                     var newTotalReviews = movie.TotalReviews + 1;
                     var newOverallRating = (movie.OverallRating * movie.TotalReviews + review.Rating) / newTotalReviews;
 

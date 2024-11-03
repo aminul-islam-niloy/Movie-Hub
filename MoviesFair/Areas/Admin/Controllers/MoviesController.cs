@@ -98,8 +98,7 @@ namespace MoviesFair.Areas.Admin.Controllers
                         }
                         catch (Exception ex)
                         {
-                            // Log any exceptions that occur
-                            // This can help diagnose the issue further
+                         
                             Console.WriteLine($"Error copying image: {ex.Message}");
                         }
                     }
@@ -109,7 +108,6 @@ namespace MoviesFair.Areas.Admin.Controllers
                     movie.MovieImages = new List<MovieImages>(); // Ensure collection is initialized
                 }
 
-                // Check if there are any images in ImagesSmall collection
                 if (movie.MovieImages != null && movie.MovieImages.Any())
                 {
                     // Set the Image property to the path of the first image
@@ -179,8 +177,7 @@ namespace MoviesFair.Areas.Admin.Controllers
                     }
                     catch (Exception ex)
                     {
-                        // Log any exceptions that occur
-                        // This can help diagnose the issue further
+
                         Console.WriteLine($"Error copying image: {ex.Message}");
                     }
                 }
@@ -190,10 +187,8 @@ namespace MoviesFair.Areas.Admin.Controllers
                 movie.MovieImages = new List<MovieImages>(); // Ensure collection is initialized
             }
 
-            // Check if there are any images in ImagesSmall collection
             if (movie.MovieImages != null && movie.MovieImages.Any())
             {
-                // Set the Image property to the path of the first image
                 movie.Image = movie.MovieImages.First().ImagePath;
             }
 

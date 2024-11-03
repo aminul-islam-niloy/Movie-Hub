@@ -7,19 +7,16 @@ namespace MoviesFair.Models
     {
         public int Id { get; set; }
 
-        // Foreign key for the Movie
         [Required]
         public int MovieId { get; set; }
 
-        // Navigation property to the Movie
         [ForeignKey("MovieId")]
         public Movie Movie { get; set; }
 
-        // Foreign key for the ApplicationUser (assuming you are using ASP.NET Core Identity)
+        // Foreign key for the ApplicationUser 
         [Required]
         public string UserId { get; set; }
 
-        // Navigation property to the ApplicationUser
         //[ForeignKey("UserId")]
         //public ApplicationUser ApplicationUser { get; set; }
     }
