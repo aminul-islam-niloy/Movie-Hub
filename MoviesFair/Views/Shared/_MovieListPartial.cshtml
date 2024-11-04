@@ -16,13 +16,10 @@
                         <img class="card-img-top" src="@movie.Image" alt="@movie.Name" style="width: 100%; height: 340px;">
                         <div class="card-body">
                             <h6 class="card-title">@movie.Name</h6>
-                            <div class="ms-lg-3">
+                            <div class="ms-lg-3 d-flex">
                                 <small class="text-muted">Year: @movie.Year</small><br />
-                                <small class="text-muted">Ratting: @movie.OverallRating</small><br />
-                             
-                                <small class="text-muted">Genre: @movie.Genre.GenreName</small><br />
-                                <small class="text-muted">Category: @movie.Category.CategoryName</small>
-                            </div>
+                                <small style="margin-left:15px" class="text-muted">Ratting: @movie.OverallRating</small><br />
+                                  </div>
                         </div>
                         <div class="card-footer btn-group">
                             <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
