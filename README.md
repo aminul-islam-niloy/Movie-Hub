@@ -1,6 +1,12 @@
-# Movie Hub
+# Movie Fair
 
-Movie Hub is a web application developed using ASP.NET Core MVC, Identity, and Entity Framework Core. It serves as a platform for users to browse, view, download, and manage movies. Administrators have the capability to add and manage movies, while customers can browse, view, download, add to favorites, and provide reviews and ratings for movies.
+Movie Fair is a web Movie hub application developed using ASP.NET Core MVC, Identity, and Entity Framework Core. It serves as a platform for users to browse, view, download, and manage movies. Administrators have the capability to add and manage movies, while customers can browse, view, download, add to favorites, and provide reviews and ratings for movies.
+
+### Live link:
+
+```
+http://moviesfair.runasp.net
+```
 
 ## Table of Contents
 
@@ -19,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Before running the application, make sure you have the following software installed:
 
-- [.NET SDK](https://dotnet.microsoft.com/download)
+- [.NET SDK](https://dotnet.microsoft.com/download) 6 or upper
 - [Visual Studio](https://visualstudio.microsoft.com/) or any other preferred IDE
 - [Git](https://git-scm.com/)
 
@@ -32,9 +38,15 @@ Before running the application, make sure you have the following software instal
    ```
 
 2. Navigate to the project directory:
+   install:
 
-   ```bash
-   install: EntityFrameworkCore Identity.UI Session SqlServer EntityFrameworkCore.Tools Validators X.PagedList.Mvc.Core
+   ```
+   EntityFrameworkCore
+    Identity.UI
+    Session
+    SqlServer
+    EntityFrameworkCore.Tools
+    X.PagedList.Mvc.Core
    ```
 
 3. Open the solution file (`MovieHub.sln`) in Visual Studio.
