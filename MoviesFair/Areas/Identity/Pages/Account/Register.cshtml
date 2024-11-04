@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <h4 class="card-title text-center">@ViewData["Title"]</h4>
                     <br />
@@ -40,14 +40,16 @@
                         <div class="mb-4">
                             <label>Select Role :</label> <br />
                             <div class="form-check">
-                                <input type="checkbox" name="roles" value="Customer" class="form-check-input" id="customerRole" />
+                                <input type="checkbox" name="roles" value="Customer" class="form-check-input" id="customerRole" checked />
                                 <label class="form-check-label" for="customerRole">Customer</label>
                             </div>
-                              <div class="form-check">
-                                  <input type="checkbox" name="roles" value="Admin" class="form-check-input" id="adminRole" />
-                                  <label class="form-check-label" for="adminRole">Admin</label>
+
+                              @*     <div class="form-check">
+                                      <input type="checkbox" name="roles" value="Admin" class="form-check-input" id="adminRole" />
+                                      <label class="form-check-label" for="adminRole">Admin</label>
+                                  </div> *@
+                       
                               </div>
-                        </div>
                         <button id="registerSubmit" type="submit" class="btn btn-primary w-100">Register</button>
                     </form>
                 </div>
