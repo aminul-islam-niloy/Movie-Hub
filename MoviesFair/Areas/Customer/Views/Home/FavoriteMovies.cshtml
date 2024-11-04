@@ -9,7 +9,9 @@
             {
                 <div class="col-lg-3 col-md-4 mb-4">
                     <div class="card h-100 position-relative shadow-sm">
+                        <a asp-action="Details"asp-area="Customer" asp-controller="Home" asp-route-id="@movie.Id">
                         <img class="card-img-top" img src="~/@movie.Image" style="height:270px; width:100%" alt="@movie.Name">
+                        </a>
                         <div class="card-body">
                             <h6 class="card-title">@movie.Name</h6>
                             <div class="ms-lg-3">
@@ -19,7 +21,7 @@
                             </div>
                         </div>
                         <div class="card-footer btn-group">
-                            <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id"> Details</a>
+                            <a asp-action="Details" asp-area"Customer" class="btn btn-primary" asp-route-id="@movie.Id"> Details</a>
                             <button class="btn btn-danger remove-from-favorites" data-movie-id="@movie.Id">Remove </button>
                         </div>
                     </div>

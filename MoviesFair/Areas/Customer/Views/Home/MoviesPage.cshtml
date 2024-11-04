@@ -39,21 +39,22 @@
         {
             <div class="col-lg-3 col-md-4 mb-4">
                 <div class="card h-100 position-relative shadow-sm">
-                    <img class="card-img-top" img src="~/@movie.Image" style="height:270px; width:100%" alt="@movie.Name">
+
+                    <a asp-action="Details" asp-area="Customer" asp-controller="Home" asp-route-id="@movie.Id">
+                        <img class="card-img-top" img src="~/@movie.Image" style="height:270px; width:100%" alt="@movie.Name">
+                    </a>
+                   
                     <div class="card-body">
                         <h6 class="card-title">@movie.Name</h6>
                         <div class="ms-lg-3">
                             <small class="text-muted">Year: @movie.Year</small>
                             <small class="text-muted">Ratting: @movie.OverallRating</small><br />
                             <br />
-                            <small class="text-muted">Genre: @movie.Genre.GenreName</small>
-                            <br />
-                            <small class="text-muted">Category: @movie.Category.CategoryName</small>
                         </div>
                     </div>
                     <div class="card-footer btn-group">
                         <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
-                        <a asp-action="Download" class="btn btn-success">Download</a>
+                        <a href="https://drive.google.com/uc?export=download&amp;id=@movie.Sourcelink" class="btn btn-success">Download</a>
                     </div>
                     <div class="position-absolute top-0 end-0 m-3">
                         <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> Add to Favorites</button>

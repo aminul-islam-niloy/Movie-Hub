@@ -1,10 +1,6 @@
 ﻿@model MoviesFair.Models.View_Model.IndexPageViewModel
 
-@{
-    ViewData["Title"] = "Movie Index";
-}
-
-<div class="container mt-4">
+<div class="container mt-2">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="search-container">
@@ -34,13 +30,13 @@
         </div>
     </div>
 
+    <h3>Movies</h3>
     <partial name="_MovieListPartial" model="Model.Movies.ToList()" title="All Movies" />
 
-    <!-- Other partial views for different categories -->
-
+    <h3>Action Movies</h3>
 
     <partial name="_MovieListPartial" model="Model.Action.ToList()" title="Action Movies" />
-
+    <h3>Animation Movies</h3>
     <partial name="_MovieListPartial" model="Model.Animation.ToList()" title="Animation Movies" />
 </div>
 
