@@ -1,5 +1,6 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+  
 }
 
 @media (min-width: 768px) {
@@ -14,7 +15,35 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('/Images/85215.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.9;
+   
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('path-to-your-calligraphy-image.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.2;
+    z-index: -1; 
+}
+
+.dropdown-menu.wide-dropdown {
+    width: 300px;
+    padding: 10px; 
 }
 
 

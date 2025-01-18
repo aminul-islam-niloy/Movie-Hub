@@ -7,6 +7,7 @@
     <title>@ViewData["Title"] - MoviesFair</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/MoviesFair.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/x-icon" href="~/avicon.ico">
@@ -27,14 +28,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-     
-
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="moviesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Movies
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="moviesDropdown">
+                            <div class="dropdown-menu wide-dropdow" aria-labelledby="moviesDropdown" style="width: 200px; padding:15px">
                              
 
                                 <a class="nav-link text-dark" asp-action="MoviesByGenre" asp-route-genreName="Horror"> Horror Movies</a>
@@ -56,7 +54,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="seriesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Series
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="seriesDropdown">
+                            <div class="dropdown-menu" aria-labelledby="seriesDropdown" style="width: 200px; padding:15px">
                    
              
                                 <a class="nav-link text-dark" asp-action="MoviesByCategory" asp-route-categoryName="Hollywood Movie">Hollywood Movie</a>
@@ -72,8 +70,6 @@
                              
                             </div>
                         </li>
-
-                 
 
 
 
@@ -110,7 +106,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="seriesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Important Sites
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="ImportantSites">
+                            <div class="dropdown-menu" aria-labelledby="ImportantSites" style="width: 200px; padding:15px">
                                 <a class="dropdown-item" target="_blank" href="https://drive.google.com/drive/folders/1mlSw_VR4UBf3w7YqBaX6dF9sRYBnl1z3?usp=sharing">Courses</a>
                                 <a class="dropdown-item" target="_blank" href="https://www.imdb.com/list/ls020735081/">Netflix Top</a>
                                 <a class="dropdown-item" target="_blank" href="https://m.imdb.com/chart/top/">Top Imdb</a>
