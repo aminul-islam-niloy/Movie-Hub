@@ -4,70 +4,77 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Movie</h4>
+<h5 class="mb-3">Edit Movie</h5>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input type="hidden" asp-for="Id" />
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GenreId" class="control-label"></label>
-                <select asp-for="GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div class="card p-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-bold">Movie Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="GenreId" class="form-label fw-bold">Genre</label>
+                    <select asp-for="GenreId" class="form-select" asp-items="ViewBag.GenreId"></select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CategoryId" class="form-label fw-bold">Category</label>
+                    <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MovieImages" class="form-label fw-bold">Movie Images</label>
+                    <input asp-for="MovieImages" class="form-control" type="file" multiple />
+                    <span asp-validation-for="MovieImages" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label asp-for="MovieImages" class="control-label"></label>
-                <input asp-for="MovieImages" class="form-control" type="file" multiple />
-                <span asp-validation-for="MovieImages" class="text-danger"></span>
-            </div>
+         
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-bold">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
+                <div class="mb-3">
+                    <label asp-for="Sourcelink" class="form-label fw-bold">Source Link</label>
+                    <input asp-for="Sourcelink" class="form-control" />
+                    <span asp-validation-for="Sourcelink" class="text-danger"></span>
+                </div>
 
+                <div class="mb-3">
+                    <label asp-for="Language" class="form-label fw-bold">Language</label>
+                    <input asp-for="Language" class="form-control" />
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <div class="mb-3">
+                    <label asp-for="Year" class="form-label fw-bold">Release Year</label>
+                    <input asp-for="Year" class="form-control" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label asp-for="Sourcelink" class="control-label"></label>
-                <input asp-for="Sourcelink" class="form-control" />
-                <span asp-validation-for="Sourcelink" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Language" class="control-label"></label>
-                <input asp-for="Language" class="form-control" />
-                <span asp-validation-for="Language" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Update" class="btn btn-primary" />
-            </div>
-        </form>
+        <div class="mt-3 d-flex ">
+            <input type="submit" value="Update" class="btn btn-primary btn-sm" />
+            <a asp-action="Index" style="margin-left:10px" class="btn btn-info btn-sm">Back to List</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

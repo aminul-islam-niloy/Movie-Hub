@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h5>Movies </h5>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-sm btn-info" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -24,9 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Image)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Language)
             </th>
@@ -49,9 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>
               <td><img src="~/@item.Image" style="max-width: 50px; max-height: 50px;" /></td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+          
             <td>
                 @Html.DisplayFor(modelItem => item.Language)
             </td>
@@ -59,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Year)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" class="btn btn-sm btn-info" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-action="Details" class="btn btn-sm btn-warning" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
