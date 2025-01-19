@@ -4,17 +4,15 @@
 
 <br />
 <div class="row">
-    <div class="col-6">
-        <h3 class="text-info">Roles</h3>
+    <div class="col-2">
+        <h5 >Roles</h5>
     </div>
     <br />
 
     <div class="col-6 text-right">
-        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Role</a>
+        <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>&nbsp; New Role</a>
 
-       @*  <a asp-area="Admin" type="button" asp-controller="Role" asp-action="Assign" class="btn btn-warning">Assign Role </a>
-        <a asp-area="Admin" type="button" asp-controller="Role" asp-action="AssignUserRole" class="btn btn-danger">View Role </a> *@
-
+     
     </div>
 </div>
 <br />
@@ -33,11 +31,11 @@
                 <td>@item.Name</td>
                 <td style="width: 150px">
                     <div class="btn-group">
-                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">
+                        <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@item.Id">
                          Edit
                         </a>
 
-                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">
+                        <a asp-action="Delete" style="margin-left:5px" class="btn btn-sm btn-danger" asp-route-id="@item.Id">
                             Delete
                         </a>
                     </div>
