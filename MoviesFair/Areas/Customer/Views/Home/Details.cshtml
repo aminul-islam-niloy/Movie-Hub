@@ -5,73 +5,86 @@
 }
 
 <div>
-    <h4>@Model.SpecificMovies.Name</h4>
+    <div class="video-player-container">
+      
 
-    <div class="row">
-        <!-- Left side for video -->
-        <div class="col-md-8">
-            <div class="embed-responsive embed-responsive-16by9">
-               @*  <iframe class="embed-responsive-item" src=" https: //drive.google.com/file/d/@Model.SpecificMovies.Sourcelink/preview" allowfullscreen style="width: 100%; height: 480px;"></iframe> *@
-                <iframe class="embed-responsive-item" src="https://drive.google.com/file/d/@Model.SpecificMovies.Sourcelink/preview" width="720" height="480" allowfullscreen></iframe>
+        <div class="row g-4 align-items-start">
+         
+            <div class="col-lg-9 col-md-8">
+                <div class="video-wrapper">
+                    <iframe class="video-frame"
+                            src="https://drive.google.com/file/d/@Model.SpecificMovies.Sourcelink/preview"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+                <img src="~/@Model.SpecificMovies.Image" class="img-fluid rounded shadow-sm" alt="Movie Image">
+
+                <h5 class="video-title text-center mt-3">@Model.SpecificMovies.Name</h5>
             </div>
         </div>
-
-
-
-        <!-- Right side for photo -->
-        <div class="col-md-4">
-
-            <img src="~/@Model.SpecificMovies.Image" class="img-fluid" alt="Movie Image" style="width:100%; height:480px">
-
-        </div>
     </div>
+
+
+
     <br />
     <br />
+    <div class="movie-details-box p-3 shadow-sm">
+        <dl class="row">
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.Name</dd>
 
-    <dl class="row">
+            <dt class="col-sm-2">Description</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.Description</dd>
 
-        <dt class="col-sm-2">Name</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.Name</dd>
+            <dt class="col-sm-2">Genre</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.Genre.GenreName</dd>
 
-        <dt class="col-sm-2">Description</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.Description</dd>
+            <dt class="col-sm-2">Category</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.Category.CategoryName</dd>
 
+            <dt class="col-sm-2">Language</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.Language</dd>
 
+            <dt class="col-sm-2">Year</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.Year</dd>
 
-        <dt class="col-sm-2">Genre</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.Genre.GenreName</dd>
+            <dt class="col-sm-2">Rating</dt>
+            <dd class="col-sm-10">
+                @for (int i = 0; i < @Model.SpecificMovies.OverallRating; i++)
+                {
+                    <i class="fas fa-star text-warning"></i>
+                }
+                @if (Model.SpecificMovies.OverallRating < 5)
+                {
+                    for (var i = @Model.SpecificMovies.OverallRating; i < 5; i++)
+                    {
+                        <i class="far fa-star text-warning"></i>
+                    }
+                }
+            </dd>
 
-        <dt class="col-sm-2">Category</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.Category.CategoryName</dd>
+            <dt class="col-sm-2">Total Review</dt>
+            <dd class="col-sm-10">@Model.SpecificMovies.TotalReviews</dd>
+        </dl>
+    </div>
 
-        <dt class="col-sm-2">Language</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.Language</dd>
-
-        <dt class="col-sm-2">Year</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.Year</dd>
-
-        <dt class="col-sm-2">Rating</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.OverallRating</dd>
-
-        <dt class="col-sm-2">Total Review</dt>
-        <dd class="col-sm-10">@Model.SpecificMovies.TotalReviews</dd>
-
-
-    </dl>
 
     <div class="text-center">
 
-        <div class="btn-group">
+        <div class="btn-group mt-3">
             <br />
             <div class="text-center">
-                <a asp-action="CreateReview" asp-controller="Home" asp-route-movieId="@Model.SpecificMovies.Id" class="btn btn-primary "> Review & Rating</a>
+                <a asp-action="CreateReview" asp-controller="Home" asp-route-movieId="@Model.SpecificMovies.Id" class="btn btn-primary "> <i class="far fa-star text-warning"></i> Review & Rating</a>
             </div>
-            <a href="https://drive.google.com/uc?export=download&amp;id=@Model.SpecificMovies.Sourcelink" style="margin-left:5px" class="btn btn-success ml-2">Download</a>
+            <a href="https://drive.google.com/uc?export=download&amp;id=@Model.SpecificMovies.Sourcelink" style="margin-left:5px" class="btn btn-success ml-2">  <i class="fas fa-download"></i> Download</a>
             <a asp-action="Index" class="btn btn-secondary ml-2" style="margin-left:5px">Back to Index</a>
         </div>
     </div>
 
-        <h4>Reviews</h4>
+        <h5 class="mt-2" >Reviews</h5>
         <br />
         <div>
             @if (Model.MovieReviews.Any())
@@ -79,18 +92,17 @@
                 @foreach (var review in Model.MovieReviews)
                 {
 
-                    <div class="review">
+                    <div class="review mt-2">
                         <div class="user-info">
-                            <img src="~/Images/user.png" alt="User Icon" class="user-icon">
+                            <img src="~/Images/user.png" alt="User Icon" class="user-icon" style="width:30px; height:30px">
                             <span class="username"> @review.UserName</span>
                         </div>
 
                         <span style="margin-left:50px" class="stars ">Rating :   @review.Rating</span>
                         <span style="margin-left:20px" class="stars ">Review :   @review.Comment</span>
                        
-
                     </div>
-                    <hr/>
+               
                 }
 
             }
@@ -103,31 +115,31 @@
         <br />
         <br />
 
-        <h4>Related Movies</h4>
+        <h5>Related Movies</h5>
         <div class="container">
 
             <div class="row">
                 <div class="col-md-12">
-                    <div>
-                    </div>
+                 
                     <div class="row">
                         @foreach (var movie in Model.RelatedMovies)
                         {
                             <div class="col-md-3 mb-4">
-                                <div class="card h-100">
-                                    <img src="~/@movie.Image" class="card-img-top" alt="Related Image" style="height: 250px; width: 100%;">
+                            <div class="card movie-card position-relative shadow-sm">
+                                <a asp-action="Details" asp-controller="Home" asp-route-id="@movie.Id">
+                                    <img src="~/@movie.Image" class="card-img-top" alt="Related Image" ></a>
                                     <div class="card-body">
                                         <h5 class="card-title">@movie.Name</h5>
 
                                         <p class="card-text">Year: @movie.Year</p>
 
                                     </div>
-                                    <div class="card-footer">
-                                        <a asp-action="Details" asp-controller="Home" asp-route-id="@movie.Id" class="btn btn-primary">View Details</a>
-                                        <div class="position-absolute top-0 end-0 m-3">
-                                            <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> + Favorites</button>
-                                        </div>
-                                    </div>
+                              
+
+                                <button class="btn btn-outline-danger btn-sm add-to-favorites position-absolute top-0 end-0 m-3" data-movie-id="@movie.Id">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                 
                                 </div>
                             </div>
                         }

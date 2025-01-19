@@ -8,29 +8,36 @@
 {
     <h4>@title</h4>
     <div class="container mt-4">
-        <div class="row">
+        <div class="row g-4">
             @foreach (var movie in Model)
             {
-                <div class="col-lg-3 col-md-4 mb-4">
-                    <div class="card h-100 position-relative shadow-sm">
-                        <a asp-action="Details"asp-area="Customer" asp-controller="Home" asp-route-id="@movie.Id">
-                        <img class="card-img-top" img src="~/@movie.Image" style="height:270px; width:100%" alt="@movie.Name">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                    <div class="card movie-card position-relative shadow-sm">
+                        <a asp-action="Details" asp-area="Customer" asp-controller="Home" asp-route-id="@movie.Id">
+                            <img class="card-img-top" src="~/@movie.Image" alt="@movie.Name">
                         </a>
                         <div class="card-body">
                             <h6 class="card-title">@movie.Name</h6>
-                            <div class="ms-lg-3">
-                                <small class="text-muted">Year: @movie.Year</small><br />
-                                <small class="text-muted">Ratting: @movie.OverallRating</small><br />
-                                <small class="text-muted">Genre: @movie.Genre.GenreName</small><br />
-                                <small class="text-muted">Category: @movie.Category.CategoryName</small>
+                            <div class="movie-details d-flex justify-content-between">
+                                <small class="text-muted">Year: @movie.Year</small>
+                                <small class="text-muted">
+                                    Rating: <i class="far fa-star text-warning"></i> @movie.OverallRating
+                                </small>
                             </div>
+                        
                         </div>
-                        <div class="card-footer btn-group">
-                            <a asp-action="Details" class="btn btn-primary" asp-route-id="@movie.Id">Watch Now</a>
-                            <a href="https://drive.google.com/uc?export=download&amp;id=@movie.Sourcelink" class="btn btn-success">Download</a>
+                        <div class="card-footer d-flex justify-content-between" style="background-color:lavenderblush">
+                            <a asp-action="Details" class="btn btn-sm" asp-route-id="@movie.Id" title="Watch Now">
+                                <i class="fas fa-play"></i> <span style="margin-left:5px">Watch</span>
+                            </a>
+                            <a href="https://drive.google.com/uc?export=download&amp;id=@movie.Sourcelink" class="btn btn-sm" title="Download">
+                                <i class="fas fa-download"></i> <span style="margin-left:5px">Download</span>
+                            </a>
                         </div>
-                        <div class="position-absolute top-0 end-0 m-3">
-                            <button class="btn btn-outline-secondary btn-sm add-to-favorites" data-movie-id="@movie.Id"><i class="fas fa-plus"></i> Add to Favorites</button>
+                        <div class="position-absolute top-0 end-0 m-2">
+                            <button class="btn btn-outline-danger btn-sm add-to-favorites" data-movie-id="@movie.Id">
+                                <i class="fas fa-heart"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
