@@ -31,27 +31,24 @@ namespace MoviesFair.Areas.Customer.Controllers
             var pageNumber = page ?? 1;
             var pageSize = 12;
 
-            // Check if the page of movies is already cached
             if (!_cache.TryGetValue($"MoviesPage_{pageNumber}_{pageSize}", out IPagedList<Movie> cachedMovies))
             {
                 var moviesQuery = _context.Movies
                     .Include(c => c.Genre)
                     .Include(c => c.Category)
-                    .OrderByDescending(m => m.Id) // Sort by descending order of ID
+                    .OrderByDescending(m => m.Id) 
                     .AsQueryable();
 
                 var movies = moviesQuery.ToPagedList(pageNumber, pageSize);
 
-                // Cache the movies page
                 _cache.Set($"MoviesPage_{pageNumber}_{pageSize}", movies, TimeSpan.FromMinutes(5));
 
                 cachedMovies = movies;
             }
 
-            // Pass genre list to the view
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
 
-            // Initialize view model
+ 
             var viewModel = new IndexPageViewModel
             {
                 Movies = cachedMovies,
@@ -97,13 +94,12 @@ namespace MoviesFair.Areas.Customer.Controllers
         {
             var moviesQuery = _context.Movies.Include(c => c.Genre).Include(c => c.Category).AsQueryable();
 
-            // Filter by genre if selected
             if (genreId != 0)
             {
                 moviesQuery = moviesQuery.Where(m => m.GenreId == genreId);
             }
 
-            // Filter by search string
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 moviesQuery = moviesQuery.Where(m => m.Name.Contains(searchString));
@@ -111,7 +107,7 @@ namespace MoviesFair.Areas.Customer.Controllers
 
             var movies = moviesQuery.ToList();
 
-            // Pass genre list to the view
+
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
 
             return RedirectToAction("MoviesPage", new { searchString, genreId });
@@ -122,13 +118,13 @@ namespace MoviesFair.Areas.Customer.Controllers
         {
             var moviesQuery = _context.Movies.Include(c => c.Genre).Include(c => c.Category).AsQueryable();
 
-            // Filter by genre if selected
+
             if (genreId != 0)
             {
                 moviesQuery = moviesQuery.Where(m => m.GenreId == genreId);
             }
 
-            // Filter by search string
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 moviesQuery = moviesQuery.Where(m => m.Name.Contains(searchString));
@@ -136,7 +132,7 @@ namespace MoviesFair.Areas.Customer.Controllers
 
             var movies = moviesQuery.ToList();
 
-            // Pass genre list to the view
+ 
             ViewData["GenreTypeSearchId"] = new SelectList(_context.Genres.ToList(), "Id", "GenreName");
 
             return View("MoviesPage", movies);
@@ -166,7 +162,7 @@ namespace MoviesFair.Areas.Customer.Controllers
 
             var relatedMovies = _context.Movies
                .Where(p => p.GenreId == Specificmovie.GenreId && p.Id != Specificmovie.Id)
-               .Take(12) // Assuming  want to display 12 related products
+               .Take(12) 
                .ToList();
 
           
@@ -227,8 +223,9 @@ namespace MoviesFair.Areas.Customer.Controllers
             return View("MoviesByGenre", movies); 
         }
 
-        [Authorize]
+ 
         [HttpPost]
+        [Authorize]
         public IActionResult AddToFavorites(int movieId)
         {
             if (!User.Identity.IsAuthenticated)

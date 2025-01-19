@@ -3,11 +3,11 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="search-container">
-                <form method="post" action="@Url.Action("Index", "Home")" class="search-form">
-                    <div class="input-group">
-                        <div class="select-container">
-                            <select class="form-control select-option" name="GenreId">
+            <div class="custom-search-container">
+                <form method="post" action="@Url.Action("Index", "Home")" class="custom-search-form">
+                    <div class="custom-input-group d-flex">
+                        <div class="custom-select-container">
+                            <select class="custom-select-option" name="GenreId">
                                 <option selected value="0">Genre List</option>
                                 @if (ViewData["GenreTypeSearchId"] is SelectList genreList)
                                 {
@@ -18,11 +18,15 @@
                                 }
                             </select>
                         </div>
-                        <div class="input-container">
-                            <input placeholder="Search Movies..." type="text" name="searchString" class="form-control">
-                        </div>
-                        <div class="button-container">
-                            <button type="submit" class="btn btn-primary">Search</button>
+                        <div class="custom-input-container d-flex" style=" width:400px;">
+                            <input placeholder="Search Movies..." type="text" name="searchString" class="custom-search-input" style=" width:400px;">
+                       
+                        <div class="custom-button-container" style="margin-left:20px">
+                            <button type="submit" class="custom-search-button">
+                                <i class="fa fa-search"></i>
+                            </button>
+
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -30,13 +34,13 @@
         </div>
     </div>
 
-    <h3>Movies</h3>
+
     <partial name="_MovieListPartial" model="Model.Movies.ToList()" title="All Movies" />
 
-    <h3>Action Movies</h3>
+    <h5 class="mt-2">Action Movies</h5>
 
     <partial name="_MovieListPartial" model="Model.Action.ToList()" title="Action Movies" />
-    <h3>Animation Movies</h3>
+    <h5 class="mt-2">Animation Movies</h5>
     <partial name="_MovieListPartial" model="Model.Animation.ToList()" title="Animation Movies" />
 </div>
 
