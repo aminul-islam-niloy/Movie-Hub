@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Category</h4>
+<h4>Create New Category</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,8 +16,9 @@
                 <input asp-for="CategoryName" class="form-control" />
                 <span asp-validation-for="CategoryName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-sm btn-primary" />
+                <a class="btn btn-sm  btn-primary" style="margin-left:10px" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
