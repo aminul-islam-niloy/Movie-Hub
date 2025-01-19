@@ -1,0 +1,9 @@
+﻿@model MoviesFair.Models.ErrorViewModel
+
+<h2>Oops! Something went wrong.</h2>
+<p>We couldn’t process your request.</p>
+@if (Model?.RequestId != null)
+{
+    <p>Request ID: @Model.RequestId</p>
+}
+<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Return to Home</a>
