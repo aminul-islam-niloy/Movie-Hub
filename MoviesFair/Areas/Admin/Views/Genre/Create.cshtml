@@ -10,13 +10,13 @@
             <div class="card">
                 <div class="card-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <label asp-for="GenreName" class="control-label">Genere Name:</label>
                         <input asp-for="GenreName" class="form-control" />
                         <span asp-validation-for="GenreName" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer mt-3">
                     <button type="submit" class="btn btn-primary">Save</button>
                     <a asp-action="Index" class="btn btn-success">Back to List</a>
                 </div>
